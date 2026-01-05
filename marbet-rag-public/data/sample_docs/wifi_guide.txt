@@ -1,0 +1,42 @@
+GUEST WIFI CONNECTION GUIDE
+
+Welcome aboard! Stay connected with our complimentary guest WiFi service.
+
+CONNECTING YOUR DEVICE
+
+For Android Smartphones:
+1. Open Settings on your device
+2. Tap on WLAN (or WiFi)
+3. Select "Guest WiFi" from the available networks
+4. Wait for the connection to establish
+5. Open your browser - you may be redirected to a login page
+6. Accept the terms and conditions
+
+For iOS Devices (iPhone/iPad):
+1. Open Settings
+2. Tap WiFi
+3. IMPORTANT: Before connecting, deactivate Private WLAN Address
+   - Tap the (i) icon next to the network name
+   - Toggle OFF "Private Wi-Fi Address"
+4. Select "Guest WiFi" from the network list
+5. Accept the terms when prompted
+
+For Laptops (Windows/Mac):
+1. Click the WiFi icon in your taskbar/menu bar
+2. Select "Guest WiFi"
+3. Open your browser to complete registration
+
+NETWORK DETAILS
+Network Name (SSID): Guest WiFi
+Password: Not required (open network)
+Coverage: All public areas and cabins
+
+TROUBLESHOOTING
+- If you cannot connect, try forgetting the network and reconnecting
+- Restart your device if connection issues persist
+- Visit the Guest Services desk on Deck 5 for assistance
+
+USAGE GUIDELINES
+- Streaming services may have limited bandwidth
+- VPN connections may experience slower speeds
+- For business needs, premium WiFi packages are available at Guest Services
