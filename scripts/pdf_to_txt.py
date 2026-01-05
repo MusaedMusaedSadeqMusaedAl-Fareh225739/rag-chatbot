@@ -19,7 +19,7 @@ try:
     import pytesseract
     from PIL import Image, ImageOps
 except ImportError as e:
-    print(f"❌ Missing dependency: {e}")
+    print(f"Missing dependency: {e}")
     print("Install with: pip install pdfplumber pytesseract Pillow")
     exit(1)
 
@@ -152,15 +152,15 @@ def process_all_pdfs(input_folder, output_folder, two_column_patterns=None, nois
     pdf_files = list(input_path.glob("*.pdf")) + list(input_path.glob("*.PDF"))
     
     if not pdf_files:
-        print(f"❌ No PDF files found in {input_folder}")
+        print(f"No PDF files found in {input_folder}")
         return
     
-    print(f"📂 Found {len(pdf_files)} PDF files\n")
+    print(f"Found {len(pdf_files)} PDF files\n")
     
     for pdf_file in pdf_files:
         out_file = output_path / (pdf_file.stem + ".txt")
         
-        print(f"→ Processing: {pdf_file.name}")
+        print(f"Processing: {pdf_file.name}")
         
         try:
             txt = extract_text_from_pdf(
@@ -172,12 +172,12 @@ def process_all_pdfs(input_folder, output_folder, two_column_patterns=None, nois
             with open(out_file, "w", encoding="utf-8") as f:
                 f.write(txt)
             
-            print(f"  ✅ Saved: {out_file.name}\n")
+            print(f"  Saved: {out_file.name}\n")
             
         except Exception as e:
-            print(f"  ❌ Error: {e}\n")
+            print(f"  Error: {e}\n")
     
-    print("✨ All done!")
+    print("Done")
 
 
 def main():
@@ -208,7 +208,7 @@ def main():
     args = parser.parse_args()
     
     print("=" * 50)
-    print("📄 PDF to Text Converter")
+    print("PDF to Text Converter")
     print("=" * 50)
     print(f"Input:  {args.input}")
     print(f"Output: {args.output}")
