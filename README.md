@@ -1,207 +1,145 @@
-# 🧠 RAG Document Chatbot
+# RAG Document Chatbot
 
-> A production-ready Retrieval-Augmented Generation (RAG) system that lets you chat with your documents using FREE Groq API.
+A retrieval-augmented generation system for document Q&A, built with LangChain, FAISS, and Groq's free API.
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![LangChain](https://img.shields.io/badge/LangChain-0.1+-green.svg)
-![Groq](https://img.shields.io/badge/Groq-FREE_API-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-<!-- Add your demo GIF here -->
-<!-- ![Demo](assets/demo.gif) -->
+## Overview
 
-## 🎯 Project Overview
+This project implements a RAG pipeline that enables natural language queries over custom document collections. Originally built for a travel company use case, it handles document chunking, semantic retrieval, and LLM-powered response generation with streaming output.
 
-This RAG chatbot enables natural language Q&A over custom document collections. Built for a travel/cruise company use case, it demonstrates enterprise-ready document retrieval with streaming LLM responses.
+The system uses Groq's free API tier, so you can run it without any costs.
 
-**🆓 100% FREE to run** - Uses Groq's free API tier (no credit card required!)
-
-### Key Features
-
-- **🔍 Semantic Search** - FAISS vector store with sentence-transformer embeddings
-- **🤖 FREE LLM API** - Powered by Groq (Llama 4, Llama 3.3, Mixtral)
-- **⚡ Streaming Responses** - Real-time token streaming for better UX
-- **📄 OCR Pipeline** - Handles scanned PDFs, two-column layouts, mixed content
-- **🎛️ Configurable** - Adjustable chunk size, overlap, and retrieval parameters
-- **✅ Tested** - Pytest suite validating retrieval quality
-
-## 🏗️ Architecture
+## Architecture
 
 ```
-┌─────────────────┐     similarity_search     ┌───────────────┐
-│    Streamlit    │◄─────────────────────────►│     FAISS     │
-│       UI        │                           │  Vector Store │
-└────────┬────────┘                           └───────┬───────┘
-         │                                            │
-         │ stream()                                   │ embeddings
-         ▼                                            ▼
-┌─────────────────┐                           ┌───────────────┐
-│   Groq API      │                           │  HuggingFace  │
-│  (Llama 4 etc)  │                           │   Embeddings  │
-└─────────────────┘                           └───────────────┘
+User Query
+    │
+    ▼
+┌──────────────┐    similarity search    ┌─────────────────┐
+│  Streamlit   │◄───────────────────────►│  FAISS Index    │
+│     UI       │                         │  (embeddings)   │
+└──────┬───────┘                         └─────────────────┘
+       │                                          │
+       │ stream                                   │ sentence-transformers
+       ▼                                          ▼
+┌──────────────┐                         ┌─────────────────┐
+│   Groq API   │                         │   HuggingFace   │
+│  (Llama 4)   │                         │    Embeddings   │
+└──────────────┘                         └─────────────────┘
 ```
 
-## 🚀 Quick Start
+## Features
 
-### Prerequisites
+- Semantic search with FAISS vector store and sentence-transformer embeddings
+- Streaming responses via Groq API (Llama 4, Llama 3.3, Mixtral)
+- OCR preprocessing pipeline for scanned PDFs and multi-column layouts
+- Configurable chunking, overlap, and retrieval parameters
+- Pytest test suite for retrieval validation
 
-- Python 3.9+
-- FREE Groq API key ([get it here](https://console.groq.com))
+## Quick Start
 
-### Installation
+**Requirements:** Python 3.9+ and a free Groq API key from [console.groq.com](https://console.groq.com)
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/YOUR_USERNAME/rag-document-chatbot.git
 cd rag-document-chatbot
 
-# 2. Create virtual environment (recommended)
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Set up your API key (optional - can also enter in UI)
-cp .env.example .env
-# Edit .env and add your GROQ_API_KEY
-
-# 5. Run the chatbot
 streamlit run chatbot.py
 ```
 
-### First Run
+Open `http://localhost:8501`, enter your API key in the sidebar, and try a query like "What activities are available in Halifax?"
 
-1. Open http://localhost:8501 in your browser
-2. Enter your Groq API key in the sidebar (or set GROQ_API_KEY env var)
-3. The app will automatically load sample travel documents
-4. Try asking: *"What activities are available in Halifax?"*
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 rag-document-chatbot/
-├── chatbot.py              # Main Streamlit application
-├── rag_utils.py            # Core RAG logic (chunking, embedding, retrieval)
-├── requirements.txt        # Python dependencies
-├── .env.example            # Example environment variables
+├── chatbot.py              # Streamlit application
+├── rag_utils.py            # RAG logic (chunking, embedding, retrieval)
+├── requirements.txt
+├── .env.example
 ├── data/
-│   └── sample_docs/        # Sample travel documents (included)
-│       ├── activities_guide.txt
-│       ├── spa_catalog.txt
-│       ├── wifi_guide.txt
-│       ├── packing_list.txt
-│       └── visa_guide.txt
+│   └── sample_docs/        # Sample documents included
 ├── scripts/
 │   └── pdf_to_txt.py       # PDF preprocessing with OCR
 └── tests/
-    └── test_rag_pipeline.py # Pytest test suite
+    └── test_rag_pipeline.py
 ```
 
-## 🔧 Configuration
+## Configuration
 
-All settings are available in the Streamlit sidebar:
+Available in the Streamlit sidebar:
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| Groq API Key | - | Your FREE API key from console.groq.com |
-| Model | `llama-4-scout-17b` | LLM model to use |
-| Chunk Size | 500 | Characters per document chunk |
+| Model | `llama-4-scout-17b` | LLM model |
+| Chunk Size | 500 | Characters per chunk |
 | Chunk Overlap | 50 | Overlap between chunks |
-| Top-K | 3 | Number of documents to retrieve |
+| Top-K | 3 | Documents to retrieve |
 
-## 📊 Available Models (All FREE!)
+## Supported Models
 
-| Model | Speed | Quality | Best For |
-|-------|-------|---------|----------|
-| `meta-llama/llama-4-scout-17b-16e-instruct` | ⚡⚡ | ⭐⭐⭐⭐ | Best overall |
-| `llama-3.3-70b-versatile` | ⚡ | ⭐⭐⭐⭐⭐ | Complex queries |
-| `llama-3.1-8b-instant` | ⚡⚡⚡ | ⭐⭐⭐ | Fast responses |
-| `mixtral-8x7b-32768` | ⚡⚡ | ⭐⭐⭐⭐ | Long context |
-| `gemma2-9b-it` | ⚡⚡⚡ | ⭐⭐⭐ | Lightweight |
+All models are free on Groq's API:
 
-## 📄 PDF Preprocessing
+| Model | Notes |
+|-------|-------|
+| `meta-llama/llama-4-scout-17b-16e-instruct` | Good balance of speed and quality |
+| `llama-3.3-70b-versatile` | Best for complex queries |
+| `llama-3.1-8b-instant` | Fastest responses |
+| `mixtral-8x7b-32768` | Long context window |
+| `gemma2-9b-it` | Lightweight option |
 
-Convert your PDFs to text for the RAG pipeline:
+## PDF Preprocessing
+
+Convert PDFs to text for indexing:
 
 ```bash
-# Basic usage
 python scripts/pdf_to_txt.py input_folder/ output_folder/
 
-# With two-column detection
+# Two-column detection
 python scripts/pdf_to_txt.py input/ output/ --two-column "A-Z" "Guide"
 
-# With noise filtering
+# Noise filtering
 python scripts/pdf_to_txt.py input/ output/ --noise "Page" "Header" "Footer"
 ```
 
-**Requires:** Tesseract OCR installed on your system.
+Requires Tesseract OCR installed on your system.
 
-## 🧪 Testing
+## Testing
 
 ```bash
-# Set API key for tests
 export GROQ_API_KEY=your_key_here
-
-# Run all tests
 pytest tests/ -v
-
-# Run only retrieval tests (no API needed)
-pytest tests/ -v -k "not rag_answer"
 ```
 
-## 🎨 Customization
+## Using Your Own Documents
 
-### Using Your Own Documents
-
-1. Add `.txt` files to `data/sample_docs/` (or any folder)
+1. Add `.txt` files to `data/sample_docs/`
 2. Update the folder path in the sidebar
 3. Click "Reset Everything" to reindex
 
-### Changing the Prompt
+## Tech Stack
 
-Edit `prompt_tpl` in `rag_utils.py` to customize the assistant's behavior:
-
-```python
-prompt_tpl = PromptTemplate(
-    input_variables=["context", "question"],
-    template="""Your custom prompt here..."""
-)
-```
-
-## 🛠️ Tech Stack
-
-- **Frontend:** Streamlit
-- **RAG Framework:** LangChain
+- **UI:** Streamlit
+- **RAG:** LangChain
 - **Vector Store:** FAISS
 - **Embeddings:** sentence-transformers/all-mpnet-base-v2
-- **LLM API:** Groq (FREE tier)
-- **PDF Processing:** pdfplumber + pytesseract
+- **LLM:** Groq API
+- **PDF Processing:** pdfplumber, pytesseract
 
-## 📚 What I Learned
+## License
 
-Building this project taught me:
+MIT
 
-- **RAG Pipeline Design** - Chunking strategies, embedding models, retrieval tuning
-- **LLM API Integration** - Working with Groq, streaming responses, error handling
-- **OCR Preprocessing** - Handling scanned documents, two-column layouts
-- **Production Considerations** - Caching, streaming, user experience
+## Author
 
-## 🤝 Contributing
-
-Contributions welcome! Please feel free to submit a Pull Request.
-
-## 📝 License
-
-MIT License - feel free to use this project for learning or commercial purposes.
-
-## 👤 Author
-
-**Musaed Al-Fareh**
-- GitHub: [@MusaedAl-Fareh](https://github.com/MusaedAl-Fareh)
-- LinkedIn: [Musaed Al-Fareh](https://linkedin.com/in/musaed-al-fareh)
-
----
-
-⭐ If you found this helpful, please star the repo!
+Musaed Al-Fareh  
+[GitHub](https://github.com/MusaedAl-Fareh) · [LinkedIn](https://linkedin.com/in/musaed-al-fareh)
