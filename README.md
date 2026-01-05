@@ -17,19 +17,19 @@ The system uses Groq's free API tier, so you can run it without any costs.
 
 ```
 User Query
-    │
-    ▼
-┌──────────────┐    similarity search    ┌─────────────────┐
-│  Streamlit   │◄───────────────────────►│  FAISS Index    │
-│     UI       │                         │  (embeddings)   │
-└──────┬───────┘                         └─────────────────┘
-       │                                          │
-       │ stream                                   │ sentence-transformers
-       ▼                                          ▼
-┌──────────────┐                         ┌─────────────────┐
-│   Groq API   │                         │   HuggingFace   │
-│  (Llama 4)   │                         │    Embeddings   │
-└──────────────┘                         └─────────────────┘
+    |
+    v
++---------------+    similarity search    +------------------+
+|   Streamlit   |<----------------------->|   FAISS Index    |
+|      UI       |                         |   (embeddings)   |
++-------+-------+                         +------------------+
+        |                                          |
+        | stream                                   | sentence-transformers
+        v                                          v
++---------------+                         +------------------+
+|   Groq API    |                         |    HuggingFace   |
+|   (Llama 4)   |                         |    Embeddings    |
++---------------+                         +------------------+
 ```
 
 ## Features
@@ -42,10 +42,10 @@ User Query
 
 ## Quick Start
 
-**Requirements:** Python 3.9+ and a free Groq API key from [console.groq.com](https://console.groq.com)
+Requirements: Python 3.9+ and a free Groq API key from [console.groq.com](https://console.groq.com)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/rag-document-chatbot.git
+git clone https://github.com/MusaedAl-Fareh/rag-document-chatbot.git
 cd rag-document-chatbot
 
 python -m venv venv
@@ -128,12 +128,12 @@ pytest tests/ -v
 
 ## Tech Stack
 
-- **UI:** Streamlit
-- **RAG:** LangChain
-- **Vector Store:** FAISS
-- **Embeddings:** sentence-transformers/all-mpnet-base-v2
-- **LLM:** Groq API
-- **PDF Processing:** pdfplumber, pytesseract
+- UI: Streamlit
+- RAG: LangChain
+- Vector Store: FAISS
+- Embeddings: sentence-transformers/all-mpnet-base-v2
+- LLM: Groq API
+- PDF Processing: pdfplumber, pytesseract
 
 ## License
 
@@ -142,4 +142,4 @@ MIT
 ## Author
 
 Musaed Al-Fareh  
-[GitHub](https://github.com/MusaedAl-Fareh) · [LinkedIn](https://linkedin.com/in/musaed-al-fareh)
+[GitHub](https://github.com/MusaedAl-Fareh) | [LinkedIn](https://linkedin.com/in/musaed-al-fareh)
