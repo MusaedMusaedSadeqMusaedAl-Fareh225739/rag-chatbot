@@ -30,7 +30,7 @@ def load_and_chunk(folder: str, chunk_size: int = 500, overlap: int = 50):
         try:
             raw = fp.read_text(encoding="utf-8", errors="ignore")
         except Exception as e:
-            print(f"⚠️ Could not read {fp.name}: {e}")
+            print(f"Warning: Could not read {fp.name}: {e}")
             continue
         
         # Clean: remove empty lines, strip whitespace
@@ -50,7 +50,7 @@ def load_and_chunk(folder: str, chunk_size: int = 500, overlap: int = 50):
             chunks.append(c)
             chunk_metas.append(meta)
     
-    print(f"📄 Loaded {len(texts)} documents → {len(chunks)} chunks")
+    print(f"Loaded {len(texts)} documents, {len(chunks)} chunks")
     return chunks, chunk_metas
 
 
@@ -66,16 +66,16 @@ def build_store(chunks: list, metas: list, embed_model: str = "sentence-transfor
     Returns:
         FAISS vector store
     """
-    print(f"🔄 Building embeddings with {embed_model}...")
+    print(f"Building embeddings with {embed_model}...")
     embeds = HuggingFaceEmbeddings(model_name=embed_model)
     store = FAISS.from_texts(chunks, embeds, metadatas=metas)
-    print("✅ Vector store ready!")
+    print("Vector store ready")
     return store
 
 
 def init_groq(api_key: str, model_name: str = "meta-llama/llama-4-scout-17b-16e-instruct"):
     """
-    Initialize Groq LLM client (FREE API!).
+    Initialize Groq LLM client (FREE API).
     
     Args:
         api_key: Groq API key (get free at console.groq.com)
@@ -84,7 +84,7 @@ def init_groq(api_key: str, model_name: str = "meta-llama/llama-4-scout-17b-16e-
     Returns:
         ChatGroq instance
     """
-    print(f"🤖 Initializing {model_name} via Groq...")
+    print(f"Initializing {model_name} via Groq...")
     
     llm = ChatGroq(
         api_key=api_key,
@@ -93,7 +93,7 @@ def init_groq(api_key: str, model_name: str = "meta-llama/llama-4-scout-17b-16e-
         max_tokens=1024,
     )
     
-    print(f"✅ Model {model_name} ready!")
+    print("Model ready")
     return llm
 
 
@@ -104,11 +104,11 @@ prompt_tpl = PromptTemplate(
 You are a friendly and helpful travel assistant. Answer the user's question using ONLY the provided context.
 
 Guidelines:
-• Be concise but informative
-• If the answer is in the context, provide it directly
-• If you don't know or it's not in the context, say "I don't have that information in my documents."
-• Use a warm, helpful tone
-• End with a brief follow-up like "Is there anything else you'd like to know?"
+- Be concise but informative
+- If the answer is in the context, provide it directly
+- If you don't know or it's not in the context, say "I don't have that information in my documents."
+- Use a warm, helpful tone
+- End with a brief follow-up like "Is there anything else you'd like to know?"
 
 Context:
 {context}
