@@ -6,6 +6,27 @@ A retrieval-augmented generation system for document Q&A, built with LangChain, 
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![LangChain](https://img.shields.io/badge/LangChain-0.1+-green.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+# RAG Document Chatbot
+
+A retrieval-augmented generation system for document Q&A, built with LangChain, FAISS, and Groq's free API.
+
+![Demo 1](https://raw.githubusercontent.com/MusaedMusaedSadeqMusaedAl-Fareh225739/rag-chatbot/main/Screenshot%202026-01-05%20044924.png)
+
+![Demo 2](https://raw.githubusercontent.com/MusaedMusaedSadeqMusaedAl-Fareh225739/rag-chatbot/main/Screenshot%202026-01-05%20044915.png)
+
+![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
+...rest of README
+```
+
+**Important:** Use `raw.githubusercontent.com` not `github.com/blob`. The blob URL won't render the image.
+
+So the structure is:
+```
+# Title
+Description
+[IMAGE 1]
+[IMAGE 2]
+[BADGES]
 
 ## Overview
 
