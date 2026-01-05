@@ -2,31 +2,14 @@
 
 A retrieval-augmented generation system for document Q&A, built with LangChain, FAISS, and Groq's free API.
 
-![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
-![LangChain](https://img.shields.io/badge/LangChain-0.1+-green.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-# RAG Document Chatbot
-
-A retrieval-augmented generation system for document Q&A, built with LangChain, FAISS, and Groq's free API.
-
 ![Demo 1](https://raw.githubusercontent.com/MusaedMusaedSadeqMusaedAl-Fareh225739/rag-chatbot/main/Screenshot%202026-01-05%20044924.png)
 
 ![Demo 2](https://raw.githubusercontent.com/MusaedMusaedSadeqMusaedAl-Fareh225739/rag-chatbot/main/Screenshot%202026-01-05%20044915.png)
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
-...rest of README
-```
-
-**Important:** Use `raw.githubusercontent.com` not `github.com/blob`. The blob URL won't render the image.
-
-So the structure is:
-```
-# Title
-Description
-[IMAGE 1]
-[IMAGE 2]
-[BADGES]
+![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
+![LangChain](https://img.shields.io/badge/LangChain-0.1+-green.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## Overview
 
@@ -66,8 +49,8 @@ User Query
 Requirements: Python 3.9+ and a free Groq API key from [console.groq.com](https://console.groq.com)
 
 ```bash
-git clone https://github.com/MusaedAl-Fareh/rag-document-chatbot.git
-cd rag-document-chatbot
+git clone https://github.com/MusaedMusaedSadeqMusaedAl-Fareh225739/rag-chatbot.git
+cd rag-chatbot
 
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -77,12 +60,12 @@ pip install -r requirements.txt
 streamlit run chatbot.py
 ```
 
-Open `http://localhost:8501`, enter your API key in the sidebar, and try a query like "What activities are available in Halifax?"
+Open `http://localhost:8501`, enter your API key in the sidebar, and start querying your documents.
 
 ## Project Structure
 
 ```
-rag-document-chatbot/
+rag-chatbot/
 ├── chatbot.py              # Streamlit application
 ├── rag_utils.py            # RAG logic (chunking, embedding, retrieval)
 ├── requirements.txt
@@ -163,4 +146,4 @@ MIT
 ## Author
 
 Musaed Al-Fareh  
-[GitHub](https://github.com/MusaedAl-Fareh) | [LinkedIn](https://linkedin.com/in/musaed-al-fareh)
+[GitHub](https://github.com/MusaedMusaedSadeqMusaedAl-Fareh225739) | [LinkedIn](https://linkedin.com/in/musaed-al-fareh)
